@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomolog</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/login.css">
+    
+    <link rel="icon" href="./img/favicon.png" />
+    <link rel="shortcut icon" href="./img/favicon.png" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+</head>
+<body>
+    <header><span>POMO</span>LOG</header>
+    <div id="log-in-screen">
+        <p>Save your logs, view your progress!</p>
+        <div id="sign-in-button">Sign in with Google</div>
+    </div>
+    <main>
+        <div id="tab-buttons">
+            <div class="tab-button" id="clock-tab-button">Clock</div>
+            <div class="tab-button" id="log-tab-button">Log</div>
+            <div class="tab-button" id="graph-tab-button">Graph</div>
+        </div>
+        <div id="tabs">
+            <!-- CLOCK TAB -->
+            <div class="tab" id="clock-tab">
+                <div class="display">
+                    <p id="overtime">OVERTIME</p>
+                    <p id="remaining">25:00</p>
+                    <p id="percent">100%</p>
+                </div>
+                <div class="controls">
+                    <div class="button start">START</div>
+                    <div class="button reset">RESET</div>
+                </div>
+            </div>
+            <!-- LOG TAB -->
+            <div class="tab" id="log-tab">
+                <div class="display">
+                    <div class="month-selector">
+                        <div class="left arrow disabled"></div>
+                        <p class="month-name">January 2020</p>
+                        <div class="right arrow"></div>
+                    </div>
+                    <div class="logs"></div>
+                </div>
+                <div class="controls">
+                    <div class="add-month">
+                        <input type="month" value="2020-01">
+                        <div class="button">Add</div>
+                    </div>
+                    <div class="button remove-month">Delete Month</div>
+                </div>
+            </div>
+            <!-- GRAPH TAB -->
+            <div class="tab" id="graph-tab">
+                <div class="month-selector">
+                    <div class="left arrow disabled"></div>
+                    <p class="month-name">January 2020</p>
+                    <div class="right arrow"></div>
+                </div>
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+        <a id="sign-out">Sign Out</a>
+    </main>
+    <footer>
+        Created By
+        <a href="https://berkinakkaya.github.io">
+            Berkin AKKAYA
+        </a>
+    </footer>
+</body>
+<script src="/__/firebase/7.14.1/firebase-app.js"></script>
+<script src="/__/firebase/7.14.1/firebase-analytics.js"></script>
+<script src="/__/firebase/7.14.1/firebase-auth.js"></script>
+<script src="/__/firebase/7.14.1/firebase-database.js"></script>
+<script src="/__/firebase/init.js"></script>
+
+<script> let data = {}; </script>
+<script src="./js/Authentication.js"></script>
+<script src="./js/Utils.js"></script>
+<script src="./js/TabDisplay.js"></script>
+<script src="./js/MonthSelectorButtons.js"></script>
+<script src="./js/ChartManager.js"></script>
+<script src="./js/LogManager.js"></script>
+<script src="./js/Database.js"></script>
+<script src="./js/Clock.js"></script>
+</html>

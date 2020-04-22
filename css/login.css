@@ -1,0 +1,46 @@
+#log-in-screen {
+  width: 85vw;
+  max-width: 450px;
+  z-index: 2;
+  height: 50vh;
+  min-height: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#log-in-screen p {
+  opacity: .6;
+}
+
+#log-in-screen #sign-in-button {
+  text-align: center;
+  padding: 15px 20px;
+  margin-top: 30px;
+  width: 200px;
+  border-radius: 10px;
+  color: white;
+  background-color: #de5246;
+  -webkit-transition: background-color .2s;
+  transition: background-color .2s;
+  cursor: pointer;
+}
+
+#log-in-screen #sign-in-button:hover {
+  background-color: #cc1111;
+}
+
+main {
+  display: none;
+}
+/*# sourceMappingURL=login.css.map */

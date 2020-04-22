@@ -1,0 +1,33 @@
+#log-in-screen {
+    width: 85vw;
+    max-width: 450px;
+    z-index: 2;
+    height: 50vh;
+    min-height: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    p { opacity: .6 }
+
+    #sign-in-button{
+        text-align: center;
+        padding: 15px 20px;
+        margin-top: 30px;
+        width: 200px;
+        border-radius: 10px;
+
+        color: white;
+        background-color: #de5246;
+        transition: background-color .2s;
+        cursor: pointer;
+
+        &:hover
+        { background-color: #cc1111 }
+    }
+}
+main{
+    display: none;
+}

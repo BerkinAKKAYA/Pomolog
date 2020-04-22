@@ -1,0 +1,380 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap");
+* {
+  margin: 0;
+  outline: 0;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  font-family: 'Inconsolata', monospace;
+}
+
+* ::-webkit-inner-spin-button,
+* ::-webkit-outer-spin-button {
+  display: none;
+}
+
+body {
+  width: 100vw;
+  overflow-x: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: default;
+  --main-spacing: 60px;
+}
+
+header {
+  font-size: 2.5em;
+  margin-top: var(--main-spacing);
+}
+
+header span {
+  color: #999;
+}
+
+main {
+  width: 85vw;
+  max-width: 450px;
+  margin: var(--main-spacing) 0;
+}
+
+main #tab-buttons {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  -webkit-column-gap: 5px;
+          column-gap: 5px;
+}
+
+@media (max-width: 500px) {
+  main #tab-buttons {
+    -webkit-column-gap: 0;
+            column-gap: 0;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+}
+
+main #tab-buttons .tab-button {
+  text-align: center;
+  padding: 12px 0;
+}
+
+main #tab-buttons .tab-button:not(.active) {
+  background-color: #eee;
+  color: #aaa;
+  cursor: pointer;
+  -webkit-transition: background-color .2s ease-in-out;
+  transition: background-color .2s ease-in-out;
+}
+
+main #tab-buttons .tab-button:not(.active):hover {
+  background-color: #ddd;
+}
+
+main #tab-buttons .tab-button.active {
+  background-color: #aaa;
+  color: #fff;
+  font-weight: bold;
+}
+
+main #tabs .month-selector {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin: 30px 0;
+}
+
+main #tabs .month-selector::after {
+  content: "";
+  width: 100px;
+  height: 2px;
+  margin-top: 36px;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: black;
+  opacity: .5;
+}
+
+main #tabs .month-selector .arrow {
+  width: 21px;
+  height: 24px;
+  background-image: url(../img/Arrow.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+main #tabs .month-selector .arrow.disabled {
+  opacity: .2;
+}
+
+main #tabs .month-selector .arrow:not(.disabled) {
+  opacity: .7;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
+  cursor: pointer;
+}
+
+main #tabs .month-selector .arrow:not(.disabled):hover {
+  opacity: 1;
+}
+
+main #tabs .month-selector .arrow.left {
+  -webkit-transform: scale(0.7) rotate(180deg);
+          transform: scale(0.7) rotate(180deg);
+}
+
+main #tabs .month-selector .arrow.right {
+  -webkit-transform: scale(0.7);
+          transform: scale(0.7);
+}
+
+main #tabs .month-selector .month-name {
+  font-weight: bold;
+  font-size: 1.4em;
+  margin: 0 15px;
+}
+
+main #tabs .tab {
+  width: calc(100% - 2px);
+}
+
+main #tabs .tab:not(.active) {
+  display: none;
+}
+
+main #tabs .tab.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main #tabs .tab .display {
+  width: 100%;
+  background-color: #f9f9f9;
+  border: 1px solid #aaa;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main #tabs .controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 12px;
+}
+
+main #tabs .controls .button, main #tabs .controls .add-month {
+  padding: 10px 0;
+  text-align: center;
+  border: 1px solid #aaa;
+  background-color: #f9f9f9;
+  -webkit-transition: background-color .2s;
+  transition: background-color .2s;
+  width: calc(50% - 10px);
+  cursor: pointer;
+}
+
+main #tabs #clock-tab {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+main #tabs #clock-tab .display {
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  height: 250px;
+}
+
+main #tabs #clock-tab .display #overtime {
+  font-size: 1.2em;
+  color: #990000;
+  text-shadow: 0 0 20px #990000;
+}
+
+main #tabs #clock-tab .display #overtime.hide {
+  display: none;
+}
+
+main #tabs #clock-tab .display #remaining {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+main #tabs #clock-tab .display #percent {
+  font-size: 1.2em;
+  opacity: .5;
+}
+
+main #tabs #clock-tab .controls .start:hover {
+  background-color: #ccffcc;
+}
+
+main #tabs #clock-tab .controls .stop:hover {
+  background-color: #ffcccc;
+}
+
+main #tabs #clock-tab .controls .reset:hover {
+  background-color: #fffccc;
+}
+
+main #tabs #log-tab {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+main #tabs #log-tab .logs {
+  width: 80%;
+  max-width: 250px;
+  padding-bottom: 30px;
+}
+
+main #tabs #log-tab .logs .log {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  white-space: pre;
+  margin-top: 5px;
+  font-size: 1.2em;
+  padding: 5px 10px;
+}
+
+main #tabs #log-tab .logs .log div:nth-child(2) {
+  margin: 0 15px;
+}
+
+main #tabs #log-tab .logs .log div:nth-child(1) {
+  font-weight: bold;
+}
+
+main #tabs #log-tab .logs .log:not(.total) {
+  cursor: pointer;
+}
+
+main #tabs #log-tab .logs .log:not(.total):hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+main #tabs #log-tab .controls .add-month .button:hover {
+  background-color: #ccffcc;
+}
+
+main #tabs #log-tab .controls .remove-month:hover {
+  background-color: #ffcccc;
+}
+
+main #tabs #log-tab .controls .add-month {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0;
+}
+
+main #tabs #log-tab .controls .add-month .button {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main #tabs #log-tab .controls .add-month input {
+  text-align: center;
+  background: none;
+  width: 100px;
+  height: 20px;
+}
+
+main #tabs #log-tab .controls .add-month input::-webkit-clear-button, main #tabs #log-tab .controls .add-month input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+main #tabs #graph-tab {
+  border: 1px solid rgba(0, 0, 0, 0);
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main #tabs #graph-tab canvas {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 200px;
+  max-height: 200px;
+  padding: 20px 0;
+}
+
+main #sign-out {
+  display: block;
+  text-align: center;
+  margin-top: 25px;
+  color: #B65959;
+  -webkit-transition: color .2s;
+  transition: color .2s;
+  cursor: pointer;
+}
+
+main #sign-out:hover {
+  color: #df0000;
+}
+
+footer {
+  color: #999;
+  padding-bottom: 50px;
+}
+
+footer a {
+  color: #527edf;
+  -webkit-transition: color .2s;
+  transition: color .2s;
+}
+
+footer a:hover {
+  color: #00a2ff;
+}
+/*# sourceMappingURL=style.css.map */
