@@ -37,6 +37,8 @@ let clockElapsed = 0;
         const percentNumber = parseInt((remainingSeconds / POMODORO_SECONDS) * 100);
         const percentDisplay = percentNumber >= 0 ? percentNumber : "+" + Math.abs(percentNumber);
         percentText.innerHTML = percentDisplay + "%";
+
+        document.title = clockRunning ? SecondsToText(remainingSeconds) : "Pomolog";
     }
 
     UpdateDisplay();
@@ -56,17 +58,20 @@ let clockElapsed = 0;
             clearInterval(clockInterval);
             clockElapsed += parseInt((Date.now() - clockStartedAt) / 1000);
         }
+
+        UpdateDisplay();
     })
     
     resetButton.addEventListener("click", () => {
         clockRunning = false;
         remainingSeconds = POMODORO_SECONDS;
-        UpdateDisplay();
         clearInterval(clockInterval);
         clockElapsed = 0;
         
         toggleButton.className = "button start";
         toggleButton.innerHTML = "START";
+        
+        UpdateDisplay();
     });
 
 })();

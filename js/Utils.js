@@ -6,11 +6,13 @@ const ValuesArray = values => {
 
     for (const key of Object.keys(values))
     {
-        result[key] = values[key];
+        result[key-1] = values[key];
     }
 
     return result;
 }
+
+const DayCount = (month, year) => new Date(year, month, 0).getDate();
 
 const Months = {
     "January": "1",

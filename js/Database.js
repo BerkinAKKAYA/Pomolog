@@ -8,11 +8,10 @@ function AddMonth(monthIndex=1, year=2020)
         return;
     }
 
-    const DAY_COUNT = new Date(year, monthIndex, 0).getDate();
     let i=1;
     let monthToAdd = {}
 
-    while (i <= DAY_COUNT)
+    while (i <= DayCount(monthIndex, year))
     {
         monthToAdd[i] = 0;
         i += 1;
