@@ -11,14 +11,14 @@ function ShowLogs(month="1-2020")
 
         const dateSTRmonth = dateSTR.split(" ")[0]
         const dateSTRday = dateSTR.split(" ")[1];
-        const whitespace = dateSTRday.toString().length == 1 ? "  " : " ";
-        dateSTR = dateSTRmonth + whitespace + dateSTRday
-    
+        const whitespace = dateSTRday.toString().length == 1 ? " " : " ";
+        const displayDate = dateSTRmonth + whitespace + `${parseInt(dateSTRday) + 1}`
+
         element.className   = "log";
-        date.innerHTML      = dateSTR;
+        date.innerHTML      = displayDate;
         semicolon.innerHTML = ":";
         pomodoros.innerHTML = pomodoroCount + " pomodoros";
-    
+
         // Make red if no pomodoros
         if (pomodoroCount == 0)
             element.style.color = "#990000";
@@ -34,8 +34,8 @@ function ShowLogs(month="1-2020")
                 pomodoros.innerHTML = whitespace + newValue + " pomodoros";
                 element.style.color = newValue == 0 ? "#990000" : "#000000";
                 
-                const day = dateSTR.split(" ")[1];
-                EditData(month, day, newValue)
+                const day = parseInt(dateSTR.split(" ").slice(-1)[0]) + 1;
+                EditData(month, day, newValue);
             }
         })
     
@@ -55,7 +55,7 @@ function ShowLogs(month="1-2020")
         totalText.innerHTML = "TOTAL";
         semicolon.innerHTML = ":";
         pomodoros.innerHTML = value + " pomodoros";
-    
+
         element.appendChild(totalText);
         element.appendChild(semicolon);
         element.appendChild(pomodoros);
@@ -68,6 +68,9 @@ function ShowLogs(month="1-2020")
     
         for (const log in logs)
         {
+            if (isNaN(log))
+                continue;
+
             const day = parseInt(log);
             const whitespace = (logs[log].toString().length == 1 ? " " : "");
             const pomodoroCount = whitespace + (logs[log] === undefined ? 0 : logs[log]);
@@ -140,8 +143,15 @@ function ClearLogTable()
         if (keys.length == 0)
             return;
 
-        const toDelete = keys[activeLogMonthIndex].split("-");
-        RemoveMonth(toDelete[0], toDelete[1]);
+        if (keys[activeLogMonthIndex])
+        {
+            const toDelete = keys[activeLogMonthIndex].split("-");
+            RemoveMonth(toDelete[0], toDelete[1]);
+        }
+        else
+        {
+            console.log("Month doesn't exists.");
+        }
     });
 
 })()

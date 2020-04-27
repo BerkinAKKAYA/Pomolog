@@ -31,8 +31,10 @@ function AddMonth(monthIndex=1, year=2020)
             else
             { data[key] = monthToAdd }
 
-            database.ref('users/' + uid).set(data);
-
+            database.ref('users/' + uid).set(data).then(() => {
+                ShowLogs(key);
+            });
+            
             UpdateDataVariable();
         })
 }
@@ -61,6 +63,7 @@ function EditData(month="1-2020", day=1, pomodoroCount=0)
 
             UpdateDataVariable();
         })
+        .catch(error => `ERROR: ${error}`);
 }
 
 function RemoveData(month=1, day=1)
@@ -85,7 +88,6 @@ function RemoveData(month=1, day=1)
             {
                 data[month][day] = null;
                 database.ref('users/' + uid).set(data);
-                console.log("Redraw logs and graphs");
             }
 
             UpdateDataVariable();
@@ -109,12 +111,17 @@ function RemoveMonth(month=1, year=2020)
         .then(snapshot => {
             let data = snapshot.val() || {};
             data[`${month}-${year}`] = {};
-            database.ref('users/' + uid).set(data);
+            database.ref('users/' + uid).set(data).then(() => {
 
-            UpdateDataVariable();
+                const keys = Object.keys(data);
 
-            if (Object.keys(data).length <= 1)
-                ClearLogTable();
+                UpdateDataVariable();
+                ShowLogs(keys[0]);
+    
+                if (keys.length <= 1)
+                    ClearLogTable();
+
+            });
         });
 }
 
@@ -134,19 +141,65 @@ function UpdateDataVariable()
         .then(snapshot => {
             let existing = snapshot.val() || {};
             data = existing;
-
-            const keys = Object.keys(data);
             
-            if (keys.length <= activeLogMonthIndex || keys.length == 1)
-                activeLogMonthIndex = 0;
-            if (keys.length <= activeGraphMonthIndex || keys.length == 1)
-                activeGraphMonthIndex = 0;
-
-            ShowLogs(keys[activeLogMonthIndex]);
+            const keys = Object.keys(data);
             ShowGraph(keys[activeGraphMonthIndex]);
-            LogMonthSelectorButtons(activeLogMonthIndex);
-            GraphMonthSelectorButtons(activeGraphMonthIndex);
+
+            const monthName = keys[activeLogMonthIndex];
+            const logs = ValuesArray(data[monthName]);
+            const totalValue = Object.values(logs).reduce((x,y) => x+y, 0);
+            const totalElement = document.querySelector("#log-tab .logs .total");
+            
+            if (totalElement)
+                totalElement.innerHTML = totalValue + " pomodoros";
         })
 }
 
-UpdateDataVariable(() => { console.log(data) });
+function InitializeActiveMonths()
+{
+    if (!firebase.auth().currentUser)
+    {
+        setTimeout(() => { InitializeActiveMonths() }, 500);
+        return;
+    }
+
+    const uid = firebase.auth().currentUser.uid;
+
+    database
+        .ref('/users/' + uid)
+        .once('value')
+        .then(snapshot => {
+            let data = snapshot.val() || {};
+
+            const today = new Date();
+            const date = `${today.getMonth()+1}-${today.getFullYear()}`;
+
+            if (data[date])
+            {
+                const initialIndex = IndexOfMonth(date);
+                activeLogMonthIndex = initialIndex;
+                activeGraphMonthIndex = initialIndex;
+            }
+
+            Draw();
+            UpdateDataVariable();
+        })
+}
+
+function Draw()
+{
+    const keys = Object.keys(data);
+    
+    if (keys.length <= activeLogMonthIndex || keys.length == 1)
+        activeLogMonthIndex = 0;
+    if (keys.length <= activeGraphMonthIndex || keys.length == 1)
+        activeGraphMonthIndex = 0;
+
+    ShowLogs(keys[activeLogMonthIndex]);
+    ShowGraph(keys[activeGraphMonthIndex]);
+    LogMonthSelectorButtons(activeLogMonthIndex);
+    GraphMonthSelectorButtons(activeGraphMonthIndex);
+}
+
+InitializeActiveMonths();
+UpdateDataVariable();
