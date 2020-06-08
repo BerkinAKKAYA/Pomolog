@@ -20,7 +20,7 @@
 }
 
 #log-in-screen p {
-  opacity: .6;
+  color: rgba(var(--foreground-color), 1);
 }
 
 #log-in-screen #sign-in-button {

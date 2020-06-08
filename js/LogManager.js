@@ -21,18 +21,19 @@ function ShowLogs(month="1-2020")
 
         // Make red if no pomodoros
         if (pomodoroCount == 0)
-            element.style.color = "#990000";
+            element.style.color = "#aa0000";
 
         // ON CLICK
         element.addEventListener("click", () => {
-            const currentValue = pomodoros.innerHTML.split(" ")[0];
-            const newValue = parseInt( prompt("New Pomodoro Count", currentValue) );
+            const newValue = parseInt(prompt("New Pomodoro Count", 0));
 
             if (newValue <= 20 && newValue >= 0)
             {
                 const whitespace = (newValue.toString().length == 1 ? " " : "");
                 pomodoros.innerHTML = whitespace + newValue + " pomodoros";
-                element.style.color = newValue == 0 ? "#990000" : "#000000";
+
+                if (newValue == 0)
+                { element.style.color = "#990000" }
                 
                 const day = parseInt(dateSTR.split(" ").slice(-1)[0]) + 1;
                 EditData(month, day, newValue);
@@ -122,7 +123,6 @@ function ClearLogTable()
         LogMonthSelectorButtons(activeLogMonthIndex);
     })
 })();
-
 
 // ADD MONTH & REMOVE MONTH
 (function () {

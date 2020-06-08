@@ -5,28 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Track your time.">
     <meta name="keywords" content="Pomodoro, Log, Track, Time, Graph, Chart">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="./manifest.json"/>
+    <link rel="canonical" href="https://pomolog-berkinakkaya.web.app"/>
+    <link rel="apple-touch-icon" href="/img/favicon/192x192.png">
+
     <title>Pomolog</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/login.css">
     
-    <link rel="icon" href="./img/favicon.png" />
-    <link rel="shortcut icon" href="./img/favicon.png" />
-
-    <link rel="manifest" href="./manifest.json">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link rel="icon" href="/img/favicon/256x256.png" />
+    <link rel="shortcut icon" href="/img/favicon/256x256.png" />
 </head>
 <body>
-    <header><span>POMO</span>LOG</header>
+    <header>
+        <h1><span>POMO</span>LOG</h1>
+        <div class="color-toggle"></div>
+    </header>
     <div id="log-in-screen">
         <p>Save your logs, view your progress!</p>
         <div id="sign-in-button">Sign in with Google</div>
     </div>
     <main>
         <div id="tab-buttons">
-            <div class="tab-button" id="clock-tab-button">Clock</div>
-            <div class="tab-button" id="log-tab-button">Log</div>
-            <div class="tab-button" id="graph-tab-button">Graph</div>
+            <div class="tab-button" id="clock-tab-button"><span>Clock</span></div>
+            <div class="tab-button" id="log-tab-button"><span>Log</span></div>
+            <div class="tab-button" id="graph-tab-button"><span>Graph</span></div>
         </div>
         <div id="tabs">
             <!-- CLOCK TAB -->
@@ -89,8 +93,21 @@
 <script src="./js/Utils.js"></script>
 <script src="./js/TabDisplay.js"></script>
 <script src="./js/MonthSelectorButtons.js"></script>
+<script src="./js/Chart.js"></script>
 <script src="./js/ChartManager.js"></script>
 <script src="./js/LogManager.js"></script>
 <script src="./js/Database.js"></script>
 <script src="./js/Clock.js"></script>
+<script src="./js/ColorToggle.js"></script>
+
+<script>
+    if ('serviceWorker' in navigator)
+    {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register('./serviceworker.js')
+                .then(reg => console.log("Service Worker Registered."))
+                .catch(err => console.log(err));
+        });
+    }
+</script>
 </html>

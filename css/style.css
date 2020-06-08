@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap");
+:root {
+  --background-color: 255,255,255;
+  --foreground-color: 0,  0,  0;
+}
+
 * {
   margin: 0;
   outline: 0;
@@ -6,6 +11,8 @@
   outline: none;
   text-decoration: none;
   font-family: 'Inconsolata', monospace;
+  -webkit-transition: background-color .3s;
+  transition: background-color .3s;
 }
 
 * ::-webkit-inner-spin-button,
@@ -16,6 +23,7 @@
 body {
   width: 100vw;
   overflow-x: hidden;
+  background-color: rgba(var(--background-color), 1);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -31,12 +39,56 @@ body {
 }
 
 header {
+  width: 85vw;
+  max-width: 450px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+header h1 {
+  color: rgba(var(--foreground-color), 1);
   font-size: 2.5em;
+  font-weight: normal;
   margin-top: var(--main-spacing);
 }
 
-header span {
-  color: #999;
+header h1 span {
+  opacity: .5;
+}
+
+header .color-toggle {
+  position: absolute;
+  right: 60px;
+  top: 60px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  background-image: url(../img/DarkMode.png);
+  background-size: contain;
+}
+
+@media (max-width: 500px) {
+  header {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  header .color-toggle {
+    right: 15px;
+    width: 42px;
+    height: 42px;
+  }
 }
 
 main {
@@ -69,20 +121,17 @@ main #tab-buttons .tab-button {
 }
 
 main #tab-buttons .tab-button:not(.active) {
-  background-color: #eee;
-  color: #aaa;
+  background-color: rgba(var(--background-color), 1);
+  color: rgba(var(--foreground-color), 1);
+  border: 1px solid #eee;
   cursor: pointer;
-  -webkit-transition: background-color .2s ease-in-out;
-  transition: background-color .2s ease-in-out;
-}
-
-main #tab-buttons .tab-button:not(.active):hover {
-  background-color: #ddd;
+  -webkit-transition: opacity .2s ease;
+  transition: opacity .2s ease;
 }
 
 main #tab-buttons .tab-button.active {
-  background-color: #aaa;
-  color: #fff;
+  background-color: rgba(var(--foreground-color), 1);
+  color: rgba(var(--background-color), 1);
   font-weight: bold;
 }
 
@@ -102,14 +151,14 @@ main #tabs .month-selector::after {
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  background-color: black;
+  background-color: rgba(var(--background-color), 1);
   opacity: .5;
 }
 
 main #tabs .month-selector .arrow {
   width: 21px;
   height: 24px;
-  background-image: url(../img/Arrow.png);
+  background-image: url(../img/BlackArrow.png);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -119,9 +168,9 @@ main #tabs .month-selector .arrow.disabled {
 }
 
 main #tabs .month-selector .arrow:not(.disabled) {
-  opacity: .7;
-  -webkit-transition: opacity .2s;
-  transition: opacity .2s;
+  opacity: .8;
+  -webkit-transition: opacity .1s;
+  transition: opacity .1s;
   cursor: pointer;
 }
 
@@ -147,6 +196,7 @@ main #tabs .month-selector .month-name {
 
 main #tabs .tab {
   width: calc(100% - 2px);
+  color: rgba(var(--foreground-color), 1);
 }
 
 main #tabs .tab:not(.active) {
@@ -161,8 +211,7 @@ main #tabs .tab.active {
 
 main #tabs .tab .display {
   width: 100%;
-  background-color: #f9f9f9;
-  border: 1px solid #aaa;
+  background-color: rgba(var(--background-color), 1);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -188,8 +237,8 @@ main #tabs .controls {
 main #tabs .controls .button, main #tabs .controls .add-month {
   padding: 10px 0;
   text-align: center;
-  border: 1px solid #aaa;
-  background-color: #f9f9f9;
+  border: 1px solid rgba(var(--foreground-color), 0.4);
+  background-color: rgba(var(--background-color), 1);
   -webkit-transition: background-color .2s;
   transition: background-color .2s;
   width: calc(50% - 10px);
@@ -231,15 +280,15 @@ main #tabs #clock-tab .display #percent {
 }
 
 main #tabs #clock-tab .controls .start:hover {
-  background-color: #ccffcc;
+  background-color: rgba(0, 255, 0, 0.5);
 }
 
 main #tabs #clock-tab .controls .stop:hover {
-  background-color: #ffcccc;
+  background-color: rgba(255, 0, 0, 0.5);
 }
 
 main #tabs #clock-tab .controls .reset:hover {
-  background-color: #fffccc;
+  background-color: #ffaa00;
 }
 
 main #tabs #log-tab {
@@ -282,15 +331,15 @@ main #tabs #log-tab .logs .log:not(.total) {
 }
 
 main #tabs #log-tab .logs .log:not(.total):hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(var(--foreground-color), 0.1);
 }
 
 main #tabs #log-tab .controls .add-month .button:hover {
-  background-color: #ccffcc;
+  background-color: rgba(0, 255, 0, 0.5);
 }
 
 main #tabs #log-tab .controls .remove-month:hover {
-  background-color: #ffcccc;
+  background-color: rgba(255, 0, 0, 0.5);
 }
 
 main #tabs #log-tab .controls .add-month {
@@ -324,6 +373,7 @@ main #tabs #log-tab .controls .add-month input {
   background: none;
   width: 100px;
   height: 20px;
+  color: rgba(var(--foreground-color), 1);
 }
 
 main #tabs #log-tab .controls .add-month input::-webkit-clear-button, main #tabs #log-tab .controls .add-month input::-webkit-calendar-picker-indicator {
@@ -331,7 +381,6 @@ main #tabs #log-tab .controls .add-month input::-webkit-clear-button, main #tabs
 }
 
 main #tabs #graph-tab {
-  border: 1px solid rgba(0, 0, 0, 0);
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -353,18 +402,18 @@ main #sign-out {
   display: block;
   text-align: center;
   margin-top: 25px;
-  color: #B65959;
+  color: rgba(255, 0, 0, 0.5);
   -webkit-transition: color .2s;
   transition: color .2s;
   cursor: pointer;
 }
 
 main #sign-out:hover {
-  color: #df0000;
+  color: red;
 }
 
 footer {
-  color: #999;
+  color: rgba(var(--foreground-color), 0.4);
   padding-bottom: 50px;
 }
 

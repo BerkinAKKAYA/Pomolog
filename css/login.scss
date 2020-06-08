@@ -10,7 +10,9 @@
     justify-content: center;
     flex-direction: column;
 
-    p { opacity: .6 }
+    p {
+        color: rgba(var(--foreground-color), 1)
+    }
 
     #sign-in-button{
         text-align: center;

@@ -1,18 +1,22 @@
 let activeGraphMonthIndex = 0;
+let activeGraphMonthName = "1-2020";
 let activeChart = null;
 
 function ShowGraph(month="1-2020")
 {
+    activeGraphMonthName = month;
+
     const DrawChart = (values=[]) => {
         const labels = [...Array(31).keys()].map(x => x+1);
         const valuesWithNulls = values.map(x => x == 0 ? null : x)
+        const color = DarkModeOn() ? "white" : "black";
 
         const data = {
             labels,
             datasets: [{
                 data: valuesWithNulls,
-                backgroundColor: "black",
-                borderColor: "black",
+                backgroundColor: color,
+                borderColor: color,
                 label: 'Day',
                 fill: false,
                 borderWidth: 2

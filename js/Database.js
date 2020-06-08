@@ -5,6 +5,7 @@ function AddMonth(monthIndex=1, year=2020)
     if (!firebase.auth().currentUser)
     {
         setTimeout(() => { AddMonth(monthIndex, year) }, 500);
+        console.log("No user logged in, trying again...");
         return;
     }
 
