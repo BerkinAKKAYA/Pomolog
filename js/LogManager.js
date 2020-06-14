@@ -22,6 +22,8 @@ function ShowLogs(month="1-2020")
         // Make red if no pomodoros
         if (pomodoroCount == 0)
             element.style.color = "#aa0000";
+        else
+            element.style.color = "unset";
 
         // ON CLICK
         element.addEventListener("click", () => {
@@ -33,7 +35,9 @@ function ShowLogs(month="1-2020")
                 pomodoros.innerHTML = whitespace + newValue + " pomodoros";
 
                 if (newValue == 0)
-                { element.style.color = "#990000" }
+                    element.style.color = "#990000";
+                else
+                    element.style.color = "unset";
                 
                 const day = parseInt(dateSTR.split(" ").slice(-1)[0]) + 1;
                 EditData(month, day, newValue);
