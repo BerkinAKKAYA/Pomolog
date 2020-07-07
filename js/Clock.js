@@ -5,6 +5,8 @@ let clockInterval = null;
 let clockStartedAt = 0;
 let clockElapsed = 0;
 
+var audio = new Audio('AlarmSound.mp3');
+
 (function () {
     const overtimeIndicator = document.getElementById("overtime");
     const remainingText = document.getElementById("remaining");
