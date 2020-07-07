@@ -1,11 +1,10 @@
+const ALARM = new Audio('AlarmSound.mp3');
 const POMODORO_SECONDS = 60 * 25;
 let remainingSeconds = POMODORO_SECONDS;
 let clockRunning = false;
 let clockInterval = null;
 let clockStartedAt = 0;
 let clockElapsed = 0;
-
-var audio = new Audio('AlarmSound.mp3');
 
 (function () {
     const overtimeIndicator = document.getElementById("overtime");
@@ -41,6 +40,10 @@ var audio = new Audio('AlarmSound.mp3');
         percentText.innerHTML = percentDisplay + "%";
 
         document.title = clockRunning ? SecondsToText(remainingSeconds) : "Pomolog";
+
+        if (remainingSeconds == 0) {
+            ALARM.play();
+        }
     }
 
     UpdateDisplay();
