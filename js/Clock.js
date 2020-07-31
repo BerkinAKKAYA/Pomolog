@@ -13,8 +13,8 @@ let clockElapsed = 0;
     const toggleButton = document.querySelector("#clock-tab .controls div:nth-child(1)");
     const resetButton = document.querySelector("#clock-tab .controls div:nth-child(2)");
 
+    // EXAMPLES: 200 to 3:20, -65 to -1:05
     const SecondsToText = seconds => {
-
         let result = "";
 
         // NEGATIVE OR NOT
@@ -35,12 +35,15 @@ let clockElapsed = 0;
         overtimeIndicator.className = remainingSeconds < 0 ? "" : "hide";
         remainingText.innerHTML = SecondsToText(remainingSeconds);
 
+        // Calculate and draw the remaining percentage
         const percentNumber = parseInt((remainingSeconds / POMODORO_SECONDS) * 100);
         const percentDisplay = percentNumber >= 0 ? percentNumber : "+" + Math.abs(percentNumber);
         percentText.innerHTML = percentDisplay + "%";
 
+        // UPDATE THE TITLE
         document.title = clockRunning ? SecondsToText(remainingSeconds) : "Pomolog";
 
+        // Play sound if no time left
         if (remainingSeconds == 0) {
             ALARM.play();
         }
@@ -48,6 +51,7 @@ let clockElapsed = 0;
 
     UpdateDisplay();
 
+    // TOGGLE RUNNING
     toggleButton.addEventListener("click", () => {
         clockRunning = !clockRunning;
         toggleButton.className = "button " + (clockRunning ? "stop" : "start");
@@ -66,7 +70,8 @@ let clockElapsed = 0;
 
         UpdateDisplay();
     })
-    
+
+    // RESET
     resetButton.addEventListener("click", () => {
         clockRunning = false;
         remainingSeconds = POMODORO_SECONDS;
