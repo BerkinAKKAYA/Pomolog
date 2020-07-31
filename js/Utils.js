@@ -1,11 +1,9 @@
 const ValuesArray = values => {
     const result = [];
 
-    if (values == undefined)
-        return
+    if (values == undefined) { return }
 
-    for (const key of Object.keys(values))
-    {
+    for (const key of Object.keys(values)) {
         result[key-1] = values[key];
     }
 
