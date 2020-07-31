@@ -6,11 +6,13 @@
     const SignOut = () => firebase.auth().signOut();
     
     document.getElementById("sign-in-button").addEventListener("click", SignIn);
-    document.getElementById("sign-out")      .addEventListener("click", SignOut);
+    document.getElementById("sign-out").addEventListener("click", SignOut);
 
     UpdateAuthPanels();
     firebase.auth().onAuthStateChanged(UpdateAuthPanels);
     
+    // If user signed in, show the main panel.
+    // Otherwise, show the sign-in panel.
     function UpdateAuthPanels()
     {
         const signInPanel = document.getElementById("log-in-screen");
