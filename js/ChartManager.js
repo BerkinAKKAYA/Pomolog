@@ -7,7 +7,9 @@ function ShowGraph(month="1-2020")
     activeGraphMonthName = month;
 
     const DrawChart = (values=[]) => {
+        // labels = [1,2,3,...,31]
         const labels = [...Array(31).keys()].map(x => x+1);
+        // Convert zeros into nulls
         const valuesWithNulls = values.map(x => x == 0 ? null : x)
         const color = DarkModeOn() ? "white" : "black";
 
@@ -40,6 +42,7 @@ function ShowGraph(month="1-2020")
             animation: false
         };
     
+        // Prevent multiple charts
         if (activeChart)
             activeChart.destroy();
     
