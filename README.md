@@ -6,8 +6,6 @@ Save how many pomodoros have you done, see monthly charts.
 * [POMOLOG](https://pomolog-berkinakkaya.web.app/)
 * [PWA Store](https://progressiveapp.store/pwa/Pomolog)
 
-## Screenshots
-
 SS1 | SS2
 --- | ---
 | ![Image 1][image1] | ![Image 2][image2]
