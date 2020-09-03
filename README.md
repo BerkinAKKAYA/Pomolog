@@ -1,12 +1,12 @@
 # Pomolog
 Save how many pomodoros have you done, see monthly charts.
 
-<hr>
+## Start Using
 
 * [POMOLOG](https://pomolog-berkinakkaya.web.app/)
 * [PWA Store](https://progressiveapp.store/pwa/Pomolog)
 
-<hr>
+## Screenshots
 
 SS1 | SS2
 --- | ---
